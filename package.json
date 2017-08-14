@@ -1,0 +1,19 @@
+{
+  "name": "meli-webapp",
+  "version": "1.0.0",
+  "description": "Web App - Test Practico para Mercado Libre Edit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristianelena/meli-webapp.git"
+  },
+  "author": "Cristian Fabían Elena <cristianfabianelena@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cristianelena/meli-webapp/issues"
+  },
+  "homepage": "https://github.com/cristianelena/meli-webapp#readme"
+}
