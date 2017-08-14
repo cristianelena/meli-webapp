@@ -16,7 +16,7 @@ server.use(express.static('public'));
 server.use('*', (req, res) => {
     const currentRoute = routes.find(route => matchPath(req.originalUrl, route));
     const context = {};
-    
+
     const markup = renderToString(
         <StaticRouter location={ req.originalUrl } context={ context }>
             <App />

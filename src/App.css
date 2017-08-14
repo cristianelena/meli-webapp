@@ -232,7 +232,10 @@ template {
 
 /* App */
 
+body {
+    background-color: #eee;
+}
+
 .app {
-    color: #f00;
-    display: flex;
+    padding-top: 70px;
 }
