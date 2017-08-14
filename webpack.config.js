@@ -1,15 +1,8 @@
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const common = {
-    module: {
-        rules: [
-            {
-                test: /js$/,
-                exclude: /(node_modules)/,
-                loader: "babel-loader"
-            }
-        ]
+    resolve: {
+        extensions: ['.js', '.jsx', '.json']
     }
 };
 
@@ -35,6 +28,11 @@ const front = {
                         "postcss-loader"
                     ]
                 })
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules)/,
+                loader: "babel-loader"
             }
         ]
     },
@@ -59,6 +57,11 @@ const back = {
             {
                 test: /\.css$/,
                 loader: "css-loader/locals"
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules)/,
+                loader: "babel-loader"
             }
         ]
     }
