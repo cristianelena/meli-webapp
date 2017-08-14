@@ -6,13 +6,13 @@ const common = {
     }
 };
 
-const front = {
+const browser = {
     entry: "./src/browser.js",
     output: {
         path: __dirname,
         filename: "./public/bundle.js"
     },
-    devtool: "cheap-module-source-map",
+    devtool: "source-map",
     module: {
         rules: [
             {
@@ -43,7 +43,7 @@ const front = {
     ]
 };
 
-const back = {
+const server = {
     entry: "./src/server.js",
     target: "node",
     output: {
@@ -51,7 +51,7 @@ const back = {
         filename: "server.js",
         libraryTarget: "commonjs2"
     },
-    devtool: "cheap-module-source-map",
+    devtool: "source-map",
     module: {
         rules: [
             {
@@ -68,6 +68,6 @@ const back = {
 };
 
 module.exports = [
-    Object.assign({}, common, front),
-    Object.assign({}, common, back)
+    Object.assign({}, common, browser),
+    Object.assign({}, common, server)
 ];
