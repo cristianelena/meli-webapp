@@ -3,6 +3,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 
 import App from './App';
+import Template from './Template';
 
 const server = express();
 const port = process.env.PORT || 3000;
@@ -11,18 +12,9 @@ const env = process.env.NODE_ENV || 'production';
 server.use(express.static('public'));
 
 server.use('/', (req, res) => {
-    res.send(`
-      <!DOCTYPE html>
-      <head>
-        <title>Mercado Libre Web App</title>
-        <link rel="stylesheet" href="/styles.css">
-        <script src="/bundle.js" defer></script>
-      </head>
-      <body>
-        <div id="root">${ renderToString(<App />) }</div>
-      </body>
-    </html>
-  `);
+    const markup = renderToString(<App />);
+
+    res.send(Template(markup));
 });
 
 server.listen(port, (err) => {
