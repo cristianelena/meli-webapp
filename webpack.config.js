@@ -14,6 +14,12 @@ const common = {
 };
 
 const front = {
+    entry: "./src/browser.js",
+    output: {
+        path: __dirname,
+        filename: "./public/bundle.js"
+    },
+    devtool: "cheap-module-source-map",
     module: {
         rules: [
             {
@@ -40,6 +46,14 @@ const front = {
 };
 
 const back = {
+    entry: "./src/server.js",
+    target: "node",
+    output: {
+        path: __dirname,
+        filename: "server.js",
+        libraryTarget: "commonjs2"
+    },
+    devtool: "cheap-module-source-map",
     module: {
         rules: [
             {
