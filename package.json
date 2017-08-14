@@ -22,5 +22,9 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "webpack": "^3.5.4"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
