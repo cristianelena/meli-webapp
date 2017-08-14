@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cristianelena/meli-webapp/issues"
   },
-  "homepage": "https://github.com/cristianelena/meli-webapp#readme"
+  "homepage": "https://github.com/cristianelena/meli-webapp#readme",
+  "devDependencies": {
+    "webpack": "^3.5.4"
+  }
 }
