@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/cristianelena/meli-webapp#readme",
   "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
     "webpack": "^3.5.4"
   }
 }
