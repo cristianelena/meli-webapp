@@ -5,6 +5,18 @@ const common = {
     module: {
         rules: [
             {
+                test: /js$/,
+                exclude: /(node_modules)/,
+                loader: "babel-loader"
+            }
+        ]
+    }
+};
+
+const front = {
+    module: {
+        rules: [
+            {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     use: [
@@ -17,23 +29,28 @@ const common = {
                         "postcss-loader"
                     ]
                 })
-            },
+            }
+        ]
+    },
+    plugins: [
+        new ExtractTextPlugin({
+            filename: "public/styles.css"
+        })
+    ]
+};
+
+const back = {
+    module: {
+        rules: [
             {
-                test: /js$/,
-                exclude: /(node_modules)/,
-                loader: "babel-loader"
+                test: /\.css$/,
+                loader: "css-loader/locals"
             }
         ]
     }
 };
 
-const front = {
-
-};
-
-
-const back = {
-
-};
-
-module.exports = [front, back];
+module.exports = [
+    Object.assign({}, common, front),
+    Object.assign({}, common, back)
+];
