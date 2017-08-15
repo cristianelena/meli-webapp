@@ -13,17 +13,32 @@ const env = process.env.NODE_ENV || 'production';
 
 server.use(express.static('public'));
 
-server.use('*', (req, res) => {
-    const currentRoute = routes.find(route => matchPath(req.originalUrl, route));
-    const context = {};
+server.use('*', (req, res, next) => {
+    const promises = [];
 
-    const markup = renderToString(
-        <StaticRouter location={ req.originalUrl } context={ context }>
-            <App />
-        </StaticRouter>
-    );
+    routes.some(route => {
+        const match = matchPath(req.originalUrl, route);
 
-    res.send(Template(markup));
+        if (match) {
+            promises.push(route.loadData(match))
+        }
+
+        return match
+    });
+
+    Promise.all(promises)
+    .then(data => {
+        const context = { initialStore: data };
+        const markup = renderToString(
+            <StaticRouter location={ req.originalUrl } context={ context }>
+                <App />
+            </StaticRouter>
+        );
+
+        res.send(Template(markup, data));
+    })
+    .catch(next);
+
 });
 
 server.listen(port, (err) => {
