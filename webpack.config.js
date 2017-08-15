@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const common = {
@@ -39,6 +40,9 @@ const browser = {
     plugins: [
         new ExtractTextPlugin({
             filename: "public/styles.css"
+        }),
+        new webpack.DefinePlugin({
+            'isBROWSER': JSON.stringify(true)
         })
     ]
 };
@@ -65,6 +69,11 @@ const server = {
             }
         ]
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            'isBROWSER': JSON.stringify(false)
+        })
+    ],
     externals: [
         {
             'isomorphic-fetch': {
