@@ -1,3 +1,5 @@
+import 'isomorphic-fetch';
+
 import Home from './views/Home';
 import Result from './views/Result';
 import Detail from './views/Detail';
@@ -9,15 +11,37 @@ const routes = [
         exact: true
     },
     {
-        path: '/items',
-        component: Result,
+        path: '/items/:id',
+        component: Detail,
+        loadData: args => loadData(args),
         exact: true
     },
     {
-        path: '/items/:id',
-        component: Detail,
+        path: '/list/:query',
+        component: Result,
+        loadData: args => loadData(args),
         exact: true
     }
 ];
+
+const loadData = args => {
+    const { id, query } = args.params;
+    let url;
+
+    if (id) {
+        url = `https://api.mercadolibre.com/items/${ id }`
+    }
+    else if (query) {
+        url = `https://api.mercadolibre.com/sites/MLA/search?q=${ query }`
+    }
+
+    if (!url) {
+        return {};
+    }
+
+    return fetch(url)
+    .then(res => res.json())
+    .catch(error => console.error(error));
+};
 
 export default routes;
