@@ -10,8 +10,8 @@ const App = () => {
             <Header />
             <ul>
                 <li><Link to="/">Inicio</Link></li>
-                <li><Link to="/items?search=iphone">Búsqueda</Link></li>
-                <li><Link to="/items/1234">Detalle</Link></li>
+                <li><Link to="/list/iphone">Búsqueda search=iphone</Link></li>
+                <li><Link to="/items/MLA664934899">Detalle ID:MLA664934899</Link></li>
             </ul>
             <Switch>
                 { routes.map((route, i) => <Route key={i} {...route} />) }
