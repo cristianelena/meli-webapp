@@ -28,7 +28,7 @@ const failedList = () => ({ type: FETCH_LIST_FAILURE });
 export const fetchList = () => (dispatch) => {
     dispatch(requestList());
 
-    return fetch('https://api.mercadolibre.com/sites/MLA/search?q=iphone')
+    return fetch('/api/items?q=iphone')
     .then(res => res.json())
     .then(list => dispatch(receivedList(list)))
     .catch(err => dispatch(failedList(err)));
@@ -41,7 +41,7 @@ const failedItem = () => ({ type: FETCH_ITEM_FAILURE });
 export const fetchItem = () => (dispatch) => {
     dispatch(requestItem());
 
-    return fetch('https://api.mercadolibre.com/items/MLA664934899')
+    return fetch('/api/items/MLA664934899')
     .then(res => res.json())
     .then(item => dispatch(receivedItem(item)))
     .catch(err => dispatch(failedItem(err)));
