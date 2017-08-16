@@ -7,9 +7,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import Template from './Template';
 
-import reducers from './reducers';
 import configureStore from './store';
-
 const store = configureStore();
 
 import routes from './routes';
