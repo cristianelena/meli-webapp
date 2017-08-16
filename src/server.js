@@ -2,9 +2,16 @@ import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import App from './App';
 import Template from './Template';
+
+import reducers from './reducers';
+import configureStore from './store';
+
+const store = configureStore();
+
 import routes from './routes';
 
 const server = express();
@@ -15,27 +22,35 @@ server.use(express.static('public'));
 
 server.use('*', (req, res, next) => {
     const promises = [];
+    const url = req.originalUrl;
 
     routes.some(route => {
-        const match = matchPath(req.originalUrl, route);
+        const match = matchPath(url, route);
 
         if (match) {
-            promises.push(route.loadData(match))
+            const fetchData = route.component.fetchData;
+
+            if (fetchData instanceof Function) {
+                promises.push(fetchData(store));
+            }
         }
 
-        return match
+        return match;
     });
 
     Promise.all(promises)
     .then(data => {
-        const context = { initialStore: data };
+        let context = {};
+
         const markup = renderToString(
-            <StaticRouter location={ req.originalUrl } context={ context }>
-                <App />
-            </StaticRouter>
+            <Provider store={ store }>
+                <StaticRouter location={ url } context={ context }>
+                    <App />
+                </StaticRouter>
+            </Provider>
         );
 
-        res.send(Template(markup, data));
+        res.send(Template(markup, store.getState()));
     })
     .catch(next);
 
