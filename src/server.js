@@ -1,4 +1,5 @@
 import express from 'express';
+import proxy from 'http-proxy-middleware';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
@@ -17,6 +18,28 @@ const port = process.env.PORT || 3000;
 const env = process.env.NODE_ENV || 'production';
 
 server.use(express.static('public'));
+
+// API Proxy
+const API_MELI = 'https://api.mercadolibre.com';
+
+const middlewareProxy = proxy({
+    target: API_MELI,
+    headers: {
+        accept: 'application/json'
+    },
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: (path, req) => {
+        if (path.includes('?q=')) {
+            return path.replace('/api/items', '/sites/MLA/search')
+        }
+
+        return path.replace('/api/items', '/items')
+    }
+});
+
+server.use('/api/items', middlewareProxy);
+//
 
 server.use('*', (req, res, next) => {
     const promises = [];
