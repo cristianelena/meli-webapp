@@ -1,0 +1,22 @@
+.breadcrumb {
+    margin: 0;
+    padding: 0 0 16px;
+    list-style: none;
+}
+
+.breadcrumb li {
+    display: inline-block;
+    color: #999;
+    margin-right: 8px;
+}
+
+.breadcrumb li:after {
+    display: inline-block;
+    content: '>';
+    margin-left: 8px;
+    color: #aaa;
+}
+
+.breadcrumb li:last-child:after {
+    content: '';
+}
