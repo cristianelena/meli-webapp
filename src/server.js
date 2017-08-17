@@ -15,7 +15,7 @@ const store = configureStore();
 import routes from './routes';
 
 const server = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || SERVER_PORT;
 const env = process.env.NODE_ENV || 'production';
 
 server.use(express.static('public'));
@@ -43,7 +43,7 @@ server.use('*', (req, res, next) => {
 
     Promise.all(promises)
     .then(data => {
-        let context = {};
+        const context = {};
 
         const markup = renderToString(
             <Provider store={ store }>

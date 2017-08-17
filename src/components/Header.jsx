@@ -5,7 +5,10 @@ class Header extends Component {
     render() {
         return (
             <header className="header">
-                Header
+                <form action="/list/">
+                    <input type="text" name="search" placeholder="Nunca dejes de buscar" />
+                    <button type="submit">buscar</button>
+                </form>
             </header>
         );
     }

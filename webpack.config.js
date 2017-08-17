@@ -42,7 +42,10 @@ const browser = {
             filename: "public/styles.css"
         }),
         new webpack.DefinePlugin({
-            'isBROWSER': JSON.stringify(true)
+            'isBROWSER': JSON.stringify(true),
+            'SERVER_HOST': '""',
+            'SERVER_PORT': '""',
+            'API_ENDPOINT': '"api/items"'
         })
     ]
 };
@@ -71,7 +74,10 @@ const server = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'isBROWSER': JSON.stringify(false)
+            'isBROWSER': JSON.stringify(false),
+            'SERVER_HOST': '"http://localhost"',
+            'SERVER_PORT': '"3000"',
+            'API_ENDPOINT': '"api/items"'
         })
     ],
     externals: [
