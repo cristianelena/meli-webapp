@@ -3,6 +3,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const common = {
     resolve: {
+        alias: {
+            components: __dirname + '/src/components'
+        },
         extensions: ['.js', '.jsx', '.json']
     }
 };
