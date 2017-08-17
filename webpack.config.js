@@ -1,5 +1,9 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
+
+const isProduction = process.env.NODE_ENV === 'production';
+
 
 const common = {
     resolve: {
@@ -16,7 +20,7 @@ const browser = {
         path: __dirname,
         filename: "./public/bundle.js"
     },
-    devtool: "source-map",
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
     module: {
         rules: [
             {
@@ -83,17 +87,37 @@ const server = {
             'API_ENDPOINT': '"api/items"'
         })
     ],
-    externals: [
-        {
+    externals: [ nodeExternals({
+        whitelist: [ 'react', 'react-dom/server', {
             'isomorphic-fetch': {
                 root: 'isomorphic-fetch',
                 commonjs2: 'isomorphic-fetch',
                 commonjs: 'isomorphic-fetch',
                 amd: 'isomorphic-fetch'
             }
-        }
-    ]
+        } ]
+    }) ]
 };
+
+if (isProduction) {
+    browser.plugins.concat([
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true,
+            beautify: false,
+            mangle: {
+                screw_ie8: true,
+                keep_fnames: true
+            },
+            compress: {
+                screw_ie8: true
+            },
+            comments: false
+        }),
+    ]);
+}
 
 module.exports = [
     Object.assign({}, common, browser),
