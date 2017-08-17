@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import './List.css';
@@ -37,9 +38,14 @@ class Result extends Component {
     render() {
         let list = <Loader />;
         let breadcrumb;
+        let title;
 
         if (this.props.list) {
             const { items, categories } = this.props.list;
+
+            title =  <Helmet>
+                <title>{ categories.join(', ') } en Mercado Libre</title>
+            </Helmet>;
 
             list = items.map(item => {
                 const { id, title, price, picture, shipping } = item;
@@ -65,6 +71,7 @@ class Result extends Component {
 
         return (
             <div className="list">
+                { title }
                 { breadcrumb }
                 { list }
             </div>

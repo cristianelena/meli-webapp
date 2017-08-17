@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
+
 import './Item.css';
 
 import { bindActionCreators } from 'redux';
@@ -31,6 +33,9 @@ class Item extends Component {
 
             itemMarkup = (
                 <div className="item">
+                    <Helmet>
+                        <title>{ title } { price.amount.toFixed(price.decimals) } en Mercado Libre</title>
+                    </Helmet>
                     <div className="item-image">
                         <img src={ picture } width="100%" alt={ title } />
                     </div>
