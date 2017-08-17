@@ -31,9 +31,10 @@ server.use('*', (req, res, next) => {
 
         if (match) {
             const fetchData = route.component.fetchData;
+            const { params } = match;
 
             if (fetchData instanceof Function) {
-                promises.push(fetchData(store));
+                promises.push(fetchData(store, params));
             }
         }
 

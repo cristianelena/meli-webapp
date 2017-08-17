@@ -25,10 +25,10 @@ const requestList = () => ({ type: FETCH_LIST_REQUEST });
 const receivedList = list => ({ type: FETCH_LIST_SUCCESS, list });
 const failedList = () => ({ type: FETCH_LIST_FAILURE });
 
-export const fetchList = () => (dispatch) => {
+export const fetchList = (query) => (dispatch) => {
     dispatch(requestList());
 
-    return fetch('/api/items?q=iphone')
+    return fetch(`/api/items?q=${ query }`)
     .then(res => res.json())
     .then(list => dispatch(receivedList(list)))
     .catch(err => dispatch(failedList(err)));
@@ -38,10 +38,10 @@ const requestItem = () => ({ type: FETCH_ITEM_REQUEST });
 const receivedItem = item => ({ type: FETCH_ITEM_SUCCESS, item });
 const failedItem = () => ({ type: FETCH_ITEM_FAILURE });
 
-export const fetchItem = () => (dispatch) => {
+export const fetchItem = (id) => (dispatch) => {
     dispatch(requestItem());
 
-    return fetch('/api/items/MLA664934899')
+    return fetch(`/api/items/${ id }`)
     .then(res => res.json())
     .then(item => dispatch(receivedItem(item)))
     .catch(err => dispatch(failedItem(err)));

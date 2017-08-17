@@ -7,12 +7,16 @@ import { connect } from 'react-redux';
 import { fetchList } from '../reducers';
 
 class Result extends Component {
-    static fetchData(store) {
-        return store.dispatch(fetchList());
+    static fetchData(store, params) {
+        const { query } = params;
+
+        return store.dispatch(fetchList(query));
     }
 
     componentDidMount() {
-        this.props.fetchList();
+        const { query } = this.props.match.params;
+
+        this.props.fetchList(query);
     }
 
     render() {

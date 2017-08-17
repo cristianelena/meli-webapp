@@ -7,12 +7,15 @@ import { connect } from 'react-redux';
 import { fetchItem } from '../reducers';
 
 class Detail extends Component {
-    static fetchData(store) {
-        return store.dispatch(fetchItem());
+    static fetchData(store, params) {
+        const { id } = params;
+
+        return store.dispatch(fetchItem(id));
     }
 
     componentDidMount() {
-        this.props.fetchItem();
+        const { id } = this.props.match.params;
+        this.props.fetchItem(id);
     }
 
     render() {
