@@ -19,9 +19,9 @@ class Result extends Component {
         let list;
 
         if (this.props.list) {
-            const { results } = this.props.list;
+            const { items } = this.props.list;
 
-            list = results.map(item => {
+            list = items.map(item => {
                 return (
                     <div key={ item.id } >
                         <span>{ item.title }</span>
