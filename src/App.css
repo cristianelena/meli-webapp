@@ -234,8 +234,10 @@ template {
 
 body {
     background-color: #eee;
+    color: #333;
+    font: normal 14px/1.2 "Proxima Nova", Helvetica, Arial, sans-serif;
 }
 
 .app {
-    padding-top: 70px;
+    padding: 70px 40px 40px;
 }
