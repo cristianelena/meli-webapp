@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import "./List.css";
+import './List.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { fetchList } from '../reducers';
 
 import Breadcrumb from 'components/Breadcrumb';
+import Loader from 'components/Loader';
 
 class Result extends Component {
     static fetchData(store, params) {
@@ -34,7 +35,7 @@ class Result extends Component {
     }
 
     render() {
-        let list;
+        let list = <Loader />;
         let breadcrumb;
 
         if (this.props.list) {

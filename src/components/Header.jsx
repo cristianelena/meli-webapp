@@ -21,7 +21,7 @@ class Header extends Component {
             <header className="header">
                 <Link to="/" className="header-logo"><img src="/logo.png" alt="Mercado Libre" /></Link>
                 <form action="/list/" className="header-form" onSubmit={ this.onSubmit }>
-                    <input type="text" name="search" ref={ search => (this.search = search) } placeholder="Nunca dejes de buscar" className="header-input" />
+                    <input type="text" defaultValue={ this.props.match.params.query } name="search" ref={ search => (this.search = search) } placeholder="Nunca dejes de buscar" className="header-input" />
                     <button type="submit" className="header-submit">buscar</button>
                 </form>
             </header>
